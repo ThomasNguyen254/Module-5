@@ -12,11 +12,16 @@
 <div id="root"></div>
 
 <script>
-import React from "react";
+    import React from 'react';
+    import ReactDOM from 'react-dom/client';
 
-const myElement = <h1>Hello!</h1>
-const root = ReactDom.createRoot(document.getElementById('root'));
-root.render(myElement);
+    function Car() {
+        return <h2>Hi, I am a Car!</h2>;
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<Car />);
+
 </script>
 
 </body>
