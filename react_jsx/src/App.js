@@ -2,19 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-      <table>
-        {students.map(student => (
-            <tr>
-              <td>{student.company}</td>
-              <td>{student.contact}</td>
-              <td>{student.country}</td>
-            </tr>
-        ))}
-      </table>
-  );
-}
-
   const students = [
     {
       company: 'Alfreds Futterkiste',
@@ -47,4 +34,16 @@ function App() {
       country: 'Italy'
     }
   ]
+  return (
+      <table>
+        {students.map(student => (
+            <tr>
+              <td>{student.company}</td>
+              <td>{student.contact}</td>
+              <td>{student.country}</td>
+            </tr>
+        ))}
+      </table>
+  );
+}
 export default App;
