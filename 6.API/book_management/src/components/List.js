@@ -1,35 +1,56 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import './list.css';
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
+import * as bookService from "../service/bookService"
 
 function List() {
-    const [books,setBooks] = useState('');
+    const navigate = useNavigate();
+    const [books, setBooks] = useState([]);
 
-    const findAll = async () => {
-        try {
-            const result = await axios.get('https://my-json-server.typicode.com/codegym-vn/mock-api-books/books')
-            setBooks(result.data)
-        } catch (e) {
-            console.log(e);
+    useEffect(() => {
+        const fetchApi = async () => {
+            const result = await bookService.findAll();
+            setBooks(result);
         }
-    }
+        fetchApi();
+    },[books])
 
-    const handleDelete = (id) => {
-        try {
-            axios.delete('https://my-json-server.typicode.com/codegym-vn/mock-api-books/books/%7Bid%7D' + id)
-            setBooks((prevState) => prevState.filter((book) => book.id != id))
-            toast('Delete book successfully!!!!')
-        } catch (e) {
-            console.log(e)
-        }
-    }
+   const deleteBook = async (id) => {
+        const result = await bookService.del(id)
+       navigate("/");
+   }
 
     return (
         <div>
-            <h1>List book</h1>
-            
+            <h1>Library</h1>
+            <NavLink to='/create' className='btn btn-primary'>Create</NavLink>
+            <table className='table'>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    books.map((book) => (
+                        <tr key={book.id}>
+                            <td>{book.title}</td>
+                            <td>{book.quantity}</td>
+                            <td>
+                                <NavLink to={`/update/${book.id}`} className="btn btn-primary">Edit</NavLink>
+                                <button onClick={fn => deleteBook(book.id)} className='btn btn-danger'>Delete</button>
+                            </td>
+                        </tr>
+                    ))
+                }
+                </tbody>
+            </table>
         </div>
     )
 }
+
+export default List;
