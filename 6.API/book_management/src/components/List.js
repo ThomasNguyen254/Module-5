@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import './list.css';
 import {NavLink, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import * as bookService from "../service/bookService"
 
-function List() {
+export function List() {
     const navigate = useNavigate();
     const [books, setBooks] = useState([]);
 
@@ -52,5 +51,3 @@ function List() {
         </div>
     )
 }
-
-export default List;

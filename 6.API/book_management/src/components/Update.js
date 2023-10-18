@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup"
-import './update.css';
 import {NavLink, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {toast} from 'react-toastify';

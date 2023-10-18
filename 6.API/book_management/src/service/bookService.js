@@ -1,8 +1,9 @@
 import axios from "axios";
+const URL = "http://localhost:8080/books/";
 
 export const findAll = async () => {
     try {
-        const result = await axios.get('http://localhost:8080/books');
+        const result = await axios.get(URL);
         return result.data;
     } catch (e) {
         console.log(e);
@@ -11,7 +12,7 @@ export const findAll = async () => {
 
 export const save = async (book) => {
     try {
-        const result = await axios.post('http://localhost:8080/books', book)
+        const result = await axios.post(URL, book)
         return result.data;
     } catch (e) {
         console.log(e)
@@ -19,7 +20,7 @@ export const save = async (book) => {
 }
 export const update = async (id, book) => {
     try {
-        const result = await axios.put('http://localhost:8080/books', id, book);
+        const result = await axios.put(URL+ id, book);
         return result.data;
 
     } catch (e) {
@@ -29,7 +30,7 @@ export const update = async (id, book) => {
 
 export const del = async (id) => {
     try {
-        const result = await axios.delete('http://localhost:8080/books', id);
+        const result = await axios.delete(URL+ id);
         return result.data;
     } catch (e) {
         console.log()
